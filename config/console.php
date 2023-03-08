@@ -41,7 +41,7 @@ $config = [
     ],
     'params' => $params,
     'controllerMap' => [
-//        'clickhouse-migrate' => \app\modules\Migrator\Infrastructure\Command\MigrateController::class,
+        'clickhouse-migrate' => \app\modules\Migrator\Infrastructure\Command\MigrateController::class,
         'access-log' => \app\modules\AccessLogMonitoring\Infrastructure\Command\AccessLogController::class
     ],
 ];
