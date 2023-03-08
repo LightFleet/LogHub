@@ -35,10 +35,14 @@ $config = [
                 'password' => ''
             ]
         ],
+        'accessLogParser' => \app\modules\AccessLogMonitoring\Infrastructure\AccessLogParser\NginxAccessLogParser::class,
+        'clickHouseLogRepository' => \app\modules\AccessLogMonitoring\Domain\AccessLogEntry\Repository\ClickhouseLogRepository::class,
+        'logMonitor' => \app\modules\AccessLogMonitoring\Usecase\Service\LogMonitor::class
     ],
     'params' => $params,
     'controllerMap' => [
-        'clickhouse-migrate' => \app\modules\Migrator\Infrastructure\Command\MigrateController::class
+//        'clickhouse-migrate' => \app\modules\Migrator\Infrastructure\Command\MigrateController::class,
+        'access-log' => \app\modules\AccessLogMonitoring\Infrastructure\Command\AccessLogController::class
     ],
 ];
 
