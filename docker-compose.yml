@@ -24,9 +24,8 @@ services:
     image: yandex/clickhouse-server
     container_name: loghub-clickhouse
     volumes:
-      - ./docker-config/clickhouse/config.xml:/etc/clickhouse-server/config.xml
       - ./docker-config/clickhouse/docker_related_config.xml:/etc/clickhouse-server/config.d/docker_related_config.xml
       - ./docker-config/clickhouse/data:/var/lib/clickhouse
     ports:
-      - 8123:8123
-      - 9000:9000
+      - "8123:8123"
+      - "9000:9000"

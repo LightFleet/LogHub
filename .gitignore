@@ -13,8 +13,10 @@ nbproject
 Thumbs.db
 
 # logs
-/log/access.log
 /log
+
+# DB data
+/docker-config/clickhouse/data
 
 # composer vendor dir
 /vendor
