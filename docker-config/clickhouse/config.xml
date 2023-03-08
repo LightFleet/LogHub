@@ -1,0 +1,42 @@
+<loghub>
+    <listen_host>127.0.0.1</listen_host>
+    <listen_port>9000</listen_port>
+    <path>/var/lib/clickhouse/</path>
+    <tmp_path>/var/tmp/clickhouse/</tmp_path>
+    <user_files_path>/var/lib/clickhouse/user_files/</user_files_path>
+    <timezone>UTC</timezone>
+    <interserver_http_port>9009</interserver_http_port>
+    <mark_cache_size>3368709120</mark_cache_size>
+
+    <logger>
+        <base>default</base>
+        <log>/var/log/clickhouse-server/clickhouse-server.log</log>
+        <errorlog>/var/log/clickhouse-server/clickhouse-server.err.log</errorlog>
+        <size>100M</size>
+        <count>10</count>
+        <log_level>trace</log_level>
+        <errorlog_level>trace</errorlog_level>
+        <console>true</console>
+    </logger>
+
+    <users>
+        <default>
+            <password>default_password</password>
+            <networks>
+                <ip>::/0</ip>
+            </networks>
+            <profile>default</profile>
+        </default>
+    </users>
+
+    <profiles>
+        <default>
+            <readonly>0</readonly>
+            <allow_ddl>1</allow_ddl>
+            <allow_introspection_functions>1</allow_introspection_functions>
+            <max_memory_usage>10000000000</max_memory_usage>
+            <use_uncompressed_cache>1</use_uncompressed_cache>
+            <max_threads>0</max_threads>
+        </default>
+    </profiles>
+</loghub>

@@ -20,13 +20,13 @@ services:
       - .:/application
       - ./docker-config/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
 
-#version: '2'
-#services:
-#  php:
-#    image: yiisoftware/yii2-php:7.4-apache
-#    volumes:
-#      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-#      - ./:/app:delegated
-#    ports:
-#      - '8000:80'
-#
+  clickhouse:
+    image: yandex/clickhouse-server
+    container_name: loghub-clickhouse
+    volumes:
+      - ./docker-config/clickhouse/config.xml:/etc/clickhouse-server/config.xml
+      - ./docker-config/clickhouse/docker_related_config.xml:/etc/clickhouse-server/config.d/docker_related_config.xml
+      - ./docker-config/clickhouse/data:/var/lib/clickhouse
+    ports:
+      - 8123:8123
+      - 9000:9000
