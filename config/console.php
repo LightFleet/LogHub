@@ -26,15 +26,20 @@ $config = [
             ],
         ],
         'db' => $db,
-    ],
-    'params' => $params,
-    /*
-    'controllerMap' => [
-        'fixture' => [ // Fixture generation command line.
-            'class' => 'yii\faker\FixtureController',
+        'clickhouseConfigProvider' => [
+            'class' => \app\modules\Migrator\Infrastructure\ConfigProvider\ClickHouseConfigProvider::class,
+            'clickhouseConfig' => [
+                'host' => 'clickhouse',
+                'port' => '8123',
+                'username' => 'default',
+                'password' => ''
+            ]
         ],
     ],
-    */
+    'params' => $params,
+    'controllerMap' => [
+        'clickhouse-migrate' => \app\modules\Migrator\Infrastructure\Command\MigrateController::class
+    ],
 ];
 
 if (YII_ENV_DEV) {
