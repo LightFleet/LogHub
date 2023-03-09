@@ -12,6 +12,8 @@ nbproject
 # windows thumbnail cache
 Thumbs.db
 
+.env
+
 # logs
 /log
 

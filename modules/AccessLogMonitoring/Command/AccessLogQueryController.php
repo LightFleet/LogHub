@@ -2,8 +2,6 @@
 
 namespace app\modules\AccessLogMonitoring\Command;
 
-use app\modules\AccessLogMonitoring\Usecase\Exception\DateStringIsNotInValidFormat;
-use app\modules\AccessLogMonitoring\Usecase\Exception\StartDateIsGreatedThanFinishDate;
 use app\modules\AccessLogMonitoring\Usecase\Service\LogQuery;
 use Symfony\Component\Console\Exception\MissingInputException;
 use yii\console\Controller;

@@ -7,10 +7,10 @@ class ClickHouseConfigProvider
     public function getConfig()
     {
         return [
-            'host' => 'clickhouse',
-            'port' => '8123',
-            'username' => 'default',
-            'password' => ''
+            'host' => getenv('CLICKHOUSE_HOST'),
+            'port' => getenv('CLICKHOUSE_PORT'),
+            'username' => getenv('CLICKHOUSE_USERNAME'),
+            'password' => getenv('CLICKHOUSE_PASSWORD')
         ];
     }
 }
