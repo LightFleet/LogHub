@@ -24,6 +24,7 @@ Now you can up the app via docker ```docker-compose.up```
 
 **NOTES:** 
 - Adjust ports to make sure they don't conflict with what you have on your local machine
+- After first connection to php-fpm container make sure to call a migration file ```php yii clickhouse-migrate/create-logs-table```
 
 
 USAGE
