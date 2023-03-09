@@ -2,9 +2,11 @@
 
 namespace app\modules\AccessLogMonitoring\Domain\AccessLogEntry\Repository;
 
+use app\modules\AccessLogMonitoring\Domain\AccessLogEntry\Collection\AccessLogEntryCollection;
 use app\modules\AccessLogMonitoring\Domain\AccessLogEntry\Entity\AccessLogEntry;
 use app\modules\DBAL\ClickhouseConnection;
 use ClickHouseDB\Client;
+use Doctrine\Common\Collections\Collection;
 
 class ClickhouseLogRepository implements ClickhouseLogRepositoryInterface
 {
@@ -22,5 +24,16 @@ class ClickhouseLogRepository implements ClickhouseLogRepositoryInterface
             [$accessLogEntry->toArray()],
             ['ip', 'dateTime', 'method', 'responseCode', 'responseSize', 'referrer', 'userAgent']
         );
+    }
+
+    public function queryBetweenDates(\DateTimeImmutable $startDateDateTime, \DateTimeImmutable $finishDateDateTime): Collection
+    {
+        $rows = $this->client->select(sprintf(
+            "SELECT * FROM nginx_access_log where dateTime > '%s' and dateTime < '%s'",
+            $startDateDateTime->format('Y-m-d H:i:s'),
+            $finishDateDateTime->format('Y-m-d H:i:s')
+        ))->rows();
+
+        return AccessLogEntryCollection::fromDatabaseRows($rows);
     }
 }

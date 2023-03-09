@@ -30,12 +30,15 @@ $config = [
         'clickhouseConnection' => \app\modules\DBAL\ClickhouseConnection::class,
         'accessLogParser' => \app\modules\AccessLogMonitoring\Infrastructure\AccessLogParser\NginxAccessLogParser::class,
         'clickHouseLogRepository' => \app\modules\AccessLogMonitoring\Domain\AccessLogEntry\Repository\ClickhouseLogRepository::class,
-        'logMonitor' => \app\modules\AccessLogMonitoring\Usecase\Service\LogMonitor::class
+
+        'logMonitor' => \app\modules\AccessLogMonitoring\Usecase\Service\LogMonitor::class,
+        'logQuery' => \app\modules\AccessLogMonitoring\Usecase\Service\LogQuery::class
     ],
     'params' => $params,
     'controllerMap' => [
         'clickhouse-migrate' => \app\modules\Migrator\Infrastructure\Command\MigrateController::class,
-        'access-log' => \app\modules\AccessLogMonitoring\Infrastructure\Command\AccessLogController::class
+        'access-log-monitoring' => \app\modules\AccessLogMonitoring\Command\AccessLogMonitoringController::class,
+        'access-log-query' => \app\modules\AccessLogMonitoring\Command\AccessLogQueryController::class
     ],
 ];
 

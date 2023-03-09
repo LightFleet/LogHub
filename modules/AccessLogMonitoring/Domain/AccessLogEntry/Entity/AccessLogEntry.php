@@ -16,6 +16,11 @@ class AccessLogEntry
     {
     }
 
+    public function __toString(): string
+    {
+        return $this->ip . ' ' . $this->date . ' ' . $this->request . ' ' . $this->status . ' ' . $this->size . $this->referer . $this->userAgent;
+    }
+
     public function getIp(): string
     {
         return $this->ip;
