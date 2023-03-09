@@ -26,15 +26,8 @@ $config = [
             ],
         ],
         'db' => $db,
-        'clickhouseConfigProvider' => [
-            'class' => \app\modules\Migrator\Infrastructure\ConfigProvider\ClickHouseConfigProvider::class,
-            'clickhouseConfig' => [
-                'host' => 'clickhouse',
-                'port' => '8123',
-                'username' => 'default',
-                'password' => ''
-            ]
-        ],
+        'clickhouseConfigProvider' => \app\modules\DBAL\ConfigProvider\ClickHouseConfigProvider::class,
+        'clickhouseConnection' => \app\modules\DBAL\ClickhouseConnection::class,
         'accessLogParser' => \app\modules\AccessLogMonitoring\Infrastructure\AccessLogParser\NginxAccessLogParser::class,
         'clickHouseLogRepository' => \app\modules\AccessLogMonitoring\Domain\AccessLogEntry\Repository\ClickhouseLogRepository::class,
         'logMonitor' => \app\modules\AccessLogMonitoring\Usecase\Service\LogMonitor::class
