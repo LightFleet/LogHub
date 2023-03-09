@@ -14,7 +14,7 @@ $this->title = 'LogHub';
 
         <br>
         <br>
-        <p>This app is designed for a single purpose: </p>
+        <p>This app is designed for a single purpose: to monitor you access log and give you the results!</p>
 
     </div>
 </div>
