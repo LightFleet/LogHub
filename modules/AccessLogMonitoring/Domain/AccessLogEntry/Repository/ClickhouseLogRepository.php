@@ -26,7 +26,7 @@ class ClickhouseLogRepository implements ClickhouseLogRepositoryInterface
         );
     }
 
-    public function queryBetweenDates(\DateTimeImmutable $startDateDateTime, \DateTimeImmutable $finishDateDateTime): Collection
+    public function fetchEntriesBetweenDates(\DateTimeImmutable $startDateDateTime, \DateTimeImmutable $finishDateDateTime): Collection
     {
         $rows = $this->client->select(sprintf(
             "SELECT * FROM nginx_access_log where dateTime > '%s' and dateTime < '%s'",
@@ -35,5 +35,16 @@ class ClickhouseLogRepository implements ClickhouseLogRepositoryInterface
         ))->rows();
 
         return AccessLogEntryCollection::fromDatabaseRows($rows);
+    }
+
+    public function countEntriesBetweenDates(\DateTimeImmutable $startDateDateTime, \DateTimeImmutable $finishDateDateTime): int
+    {
+        $count = $this->client->select(sprintf(
+            "SELECT count() FROM nginx_access_log where dateTime > '%s' and dateTime < '%s'",
+            $startDateDateTime->format('Y-m-d H:i:s'),
+            $finishDateDateTime->format('Y-m-d H:i:s')
+        ))->fetchOne();
+
+        return (int)reset($count);
     }
 }

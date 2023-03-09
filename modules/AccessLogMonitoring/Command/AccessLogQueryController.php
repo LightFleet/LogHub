@@ -35,7 +35,7 @@ class AccessLogQueryController extends Controller
                 throw new MissingInputException('finishDate is a required parameter');
             }
 
-            $logs = $logQuery->queryBetweenDates($this->startDate, $this->finishDate);
+            $logs = $logQuery->fetchEntriesBetweenDates($this->startDate, $this->finishDate);
 
             foreach ($logs as $log) {
                 echo PHP_EOL . $log;
@@ -48,5 +48,25 @@ class AccessLogQueryController extends Controller
         echo PHP_EOL;
     }
 
+    public function actionQueryCountBetweenDates(LogQuery $logQuery)
+    {
+        echo PHP_EOL;
 
+        try {
+            if (!$this->startDate) {
+                throw new MissingInputException('startDate is a required parameter');
+            }
+            if (!$this->finishDate) {
+                throw new MissingInputException('finishDate is a required parameter');
+            }
+
+            echo PHP_EOL;
+            echo 'Queries count: ' . $logQuery->countEntriesBetweenDates($this->startDate, $this->finishDate);
+
+        } catch (\Exception $e) {
+            echo 'Error occurred: ' . $e->getMessage() . PHP_EOL;
+        }
+
+        echo PHP_EOL;
+    }
 }

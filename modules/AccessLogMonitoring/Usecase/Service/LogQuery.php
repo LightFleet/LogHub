@@ -17,10 +17,27 @@ class LogQuery
     {
     }
 
-    public function queryBetweenDates(
+    public function fetchEntriesBetweenDates(
         string $startDate,
         string $finishDate,
     ): Collection
+    {
+        return $this->clickhouseLogRepository->fetchEntriesBetweenDates(
+            ...$this->preprocessLogEntries($startDate, $finishDate)
+        );
+    }
+
+    public function countEntriesBetweenDates(
+        string $startDate,
+        string $finishDate,
+    ): int
+    {
+        return $this->clickhouseLogRepository->countEntriesBetweenDates(
+            ...$this->preprocessLogEntries($startDate, $finishDate)
+        );
+    }
+
+    private function preprocessLogEntries(string $startDate, string $finishDate): array
     {
         $this->validateDateTimeString($startDate);
         $this->validateDateTimeString($finishDate);
@@ -32,7 +49,7 @@ class LogQuery
             throw new StartDateIsGreatedThanFinishDate("startDate should be before finishDate");
         }
 
-        return $this->clickhouseLogRepository->queryBetweenDates($startDateDateTime, $finishDateDateTime);
+        return [$startDateDateTime, $finishDateDateTime];
     }
 
     /**
