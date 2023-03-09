@@ -23,7 +23,8 @@ class AccessLogEntry
 
     public function getDate(): string
     {
-        return $this->date;
+        $dateTime = new \DateTimeImmutable($this->date);
+        return ($dateTime)->format('Y-m-d H:m:s');
     }
 
     public function getRequest(): string
@@ -49,5 +50,18 @@ class AccessLogEntry
     public function getUserAgent(): string
     {
         return $this->userAgent;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            $this->getIp(),
+            $this->getDate(),
+            $this->getRequest(),
+            $this->getStatus(),
+            $this->getSize(),
+            $this->getReferer(),
+            $this->getUserAgent(),
+        ];
     }
 }

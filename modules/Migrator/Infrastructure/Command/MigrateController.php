@@ -2,7 +2,8 @@
 
 namespace app\modules\Migrator\Infrastructure\Command;
 
-use app\modules\Migrator\Infrastructure\ConfigProvider\ClickHouseConfigProvider;
+use app\modules\DBAL\ClickhouseConnection;
+use app\modules\DBAL\ConfigProvider\ClickHouseConfigProvider;
 use ClickHouseDB\Client;
 use yii\console\Controller;
 
@@ -13,9 +14,9 @@ class MigrateController extends Controller
         parent::__construct($id, $module, $config);
     }
 
-    public function actionCreateLogsTable(ClickHouseConfigProvider $clickhouseConfigProvider)
+    public function actionCreateLogsTable(ClickhouseConnection $connection)
     {
-        $db = new Client($clickhouseConfigProvider->getConfig());
+        $db = $connection->getClient();
 
         $db->write('
         CREATE TABLE IF NOT EXISTS nginx_access_log (
